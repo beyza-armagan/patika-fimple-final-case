@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm, Controller } from "react-hook-form";
 import { applicationForm } from "../utils/validationSchemas";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const resolver = yupResolver(applicationForm);
 
@@ -19,12 +19,11 @@ export default function CreateApplication() {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({resolver});
+  } = useForm({ resolver });
 
   const handleFormSubmit = (formData) => {
     console.log("Form submitted:", formData);
   };
-
 
   return (
     <Box p={4}>
@@ -45,7 +44,11 @@ export default function CreateApplication() {
                   />
                 )}
               />
-              {errors.name && <Box color="red.500" textAlign="right">{errors.name.message}</Box>}
+              {errors.name && (
+                <Box color="red.500" textAlign="right">
+                  {errors.name.message}
+                </Box>
+              )}
             </FormControl>
           </GridItem>
 
@@ -65,7 +68,9 @@ export default function CreateApplication() {
                 )}
               />
               {errors.surname && (
-                <Box color="red.500" textAlign="right">{errors.surname.message}</Box>
+                <Box color="red.500" textAlign="right">
+                  {errors.surname.message}
+                </Box>
               )}
             </FormControl>
           </GridItem>
@@ -85,7 +90,11 @@ export default function CreateApplication() {
                   />
                 )}
               />
-              {errors.age && <Box color="red.500" textAlign="right">{errors.age.message}</Box>}
+              {errors.age && (
+                <Box color="red.500" textAlign="right">
+                  {errors.age.message}
+                </Box>
+              )}
             </FormControl>
           </GridItem>
 
@@ -100,11 +109,15 @@ export default function CreateApplication() {
                     {...field}
                     id="tc"
                     type="text"
-                    placeholder="Lütfen TC numaranızı girin"
+                    placeholder="Lütfen TC numarası girin"
                   />
                 )}
               />
-              {errors.tc && <Box color="red.500" textAlign="right">{errors.tc.message}</Box>}
+              {errors.tc && (
+                <Box color="red.500" textAlign="right">
+                  {errors.tc.message}
+                </Box>
+              )}
             </FormControl>
           </GridItem>
 
@@ -147,7 +160,9 @@ export default function CreateApplication() {
                 )}
               />
               {errors.address && (
-                <Box color="red.500" textAlign="right">{errors.address.message}</Box>
+                <Box color="red.500" textAlign="right">
+                  {errors.address.message}
+                </Box>
               )}
             </FormControl>
           </GridItem>
@@ -168,7 +183,9 @@ export default function CreateApplication() {
                 )}
               />
               {errors.additionalInfo && (
-                <Box color="red.500" textAlign="right">{errors.additionalInfo.message}</Box>
+                <Box color="red.500" textAlign="right">
+                  {errors.additionalInfo.message}
+                </Box>
               )}
             </FormControl>
           </GridItem>

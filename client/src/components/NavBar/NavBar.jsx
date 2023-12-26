@@ -1,9 +1,23 @@
 import { Link } from "react-router-dom";
-import { Button, Divider, Flex, Input, FormControl } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  Divider,
+  Flex,
+  Input,
+  FormControl,
+  Heading,
+} from "@chakra-ui/react";
+import AdminLogin from "../Admin/AdminLogin";
 
 function NavBar() {
   return (
     <nav>
+      <Box mb={14}>
+        <Heading as="h1" size="lg">
+          Başvuru Yönetim Sistemi
+        </Heading>
+      </Box>
       <Flex justifyContent="space-between" alignItems="center">
         <FormControl>
           <Link to="/basvuru-sorgula">
@@ -12,7 +26,10 @@ function NavBar() {
                 type="text"
                 id="code"
                 placeholder="Lütfen başvuru numaranızı girin"
+                size="lg" // Set the size to "lg" or adjust as needed
                 mr={2}
+                htmlSize={70}
+                width="auto"
               />
               <Button mr={10}>Sorgula</Button>
             </Flex>
