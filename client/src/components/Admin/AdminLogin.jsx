@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
-  Button,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+import { Box, FormLabel, Input, Button } from "@chakra-ui/react";
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
