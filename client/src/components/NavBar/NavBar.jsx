@@ -4,11 +4,9 @@ import {
   Box,
   Divider,
   Flex,
-  Input,
   FormControl,
   Heading,
 } from "@chakra-ui/react";
-import AdminLogin from "../Admin/AdminLogin";
 
 function NavBar() {
   return (
@@ -22,16 +20,7 @@ function NavBar() {
         <FormControl>
           <Link to="/basvuru-sorgula">
             <Flex alignItems="center">
-              <Input
-                type="text"
-                id="code"
-                placeholder="Lütfen başvuru numaranızı girin"
-                size="lg" // Set the size to "lg" or adjust as needed
-                mr={2}
-                htmlSize={70}
-                width="auto"
-              />
-              <Button mr={10}>Sorgula</Button>
+              <Button mr={10}>Başvuru Sorgula</Button>
             </Flex>
           </Link>
         </FormControl>

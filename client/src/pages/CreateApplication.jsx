@@ -11,10 +11,16 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { applicationForm } from "../utils/validationSchemas";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useData } from "../context/DataContext";
+import { useNavigate } from "react-router-dom";
 
 const resolver = yupResolver(applicationForm);
 
 export default function CreateApplication() {
+  const navigate = useNavigate();
+
+  const { setData } = useData();
+
   const {
     handleSubmit,
     control,
@@ -22,6 +28,8 @@ export default function CreateApplication() {
   } = useForm({ resolver });
 
   const handleFormSubmit = (formData) => {
+    setData(formData);
+    navigate("/basvuru-basarili", { state: { formData } });
     console.log("Form submitted:", formData);
   };
 
@@ -41,6 +49,7 @@ export default function CreateApplication() {
                     type="text"
                     id="name"
                     placeholder="Lütfen adınızı girin"
+                    value={field.value || ""}
                   />
                 )}
               />
@@ -64,6 +73,7 @@ export default function CreateApplication() {
                     id="surname"
                     type="text"
                     placeholder="Lütfen soyadınızı girin"
+                    value={field.value || ""}
                   />
                 )}
               />
@@ -87,6 +97,7 @@ export default function CreateApplication() {
                     id="age"
                     type="text"
                     placeholder="Lütfen yaşınızı girin"
+                    value={field.value || ""}
                   />
                 )}
               />
@@ -110,6 +121,7 @@ export default function CreateApplication() {
                     id="tc"
                     type="text"
                     placeholder="Lütfen TC numarası girin"
+                    value={field.value || ""}
                   />
                 )}
               />
@@ -133,6 +145,7 @@ export default function CreateApplication() {
                       {...field}
                       id="applicationReason"
                       placeholder="Lütfen başvuru nedeninizi yazın"
+                      value={field.value || ""}
                     />
                     {errors.applicationReason && (
                       <Box color="red.500" textAlign="right">
@@ -156,6 +169,7 @@ export default function CreateApplication() {
                     {...field}
                     id="address"
                     placeholder="Lütfen adresinizi yazın"
+                    value={field.value || ""}
                   />
                 )}
               />
@@ -179,6 +193,7 @@ export default function CreateApplication() {
                     type="text"
                     id="additionalInfo"
                     placeholder="Lütfen eklemek istediklerinizi yazınız"
+                    value={field.value || ""}
                   />
                 )}
               />
