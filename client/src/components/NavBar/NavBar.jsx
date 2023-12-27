@@ -29,11 +29,7 @@ function NavBar() {
           <Button>Admin Login</Button>
         </Link>
       </Flex>
-      <Divider
-        borderColor="teal.500" // Customize the border color
-        borderWidth="3px" // Customize the border width
-        marginY="13"
-      />
+      <Divider borderColor="teal.500" borderWidth="1px" marginY="13" />
     </nav>
   );
 }

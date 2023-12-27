@@ -1,24 +1,35 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useData } from "../context/DataContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const ApplicationSuccessful = () => {
-  const { data, setData } = useData();
+  const { setData } = useData();
   const [code, setCode] = useState(null);
 
-  const location = useLocation();
-  // Memoize the formData object to prevent unnecessary recreation
-  const formData = location.state?.formData || {
-    name: "beyza",
-    surname: "beuyza",
-    age: 30,
-    tc: 8989,
-    applicationReason: "nee",
-    address: "ist",
-    additionalInfo: "no info",
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // Go back to the previous page
   };
+
+  const location = useLocation();
+
+  // Memoize the formData object to prevent unnecessary recreation
+  const formData = useMemo(
+    () =>
+      location.state?.formData || {
+        name: "beyza",
+        surname: "beuyza",
+        age: 30,
+        tc: 8989,
+        applicationReason: "nee",
+        address: "ist",
+        additionalInfo: "no info",
+      },
+    [location.state]
+  );
 
   useEffect(() => {
     // Generate a random application code
@@ -33,27 +44,31 @@ const ApplicationSuccessful = () => {
       applicationCode: generatedCode,
     };
 
-    // Set data only once when the component mounts
     setData(dataWithCode);
   }, [setData, formData]);
 
-  // Use useEffect to log the updated data when it changes
-  useEffect(() => {
-    console.log("yeni data:", data);
-  }, [data]);
-
   return (
-    <Box p={4}>
-      <p className="text-2xl font-bold mb-4">Başvurunuz Başarıyla Alındı!</p>
-      <p>Ad: {formData.name}</p>
-      <p>Soyad: {formData.surname}</p>
-      <p>Age: {formData.age}</p>
-      <p>TC: {formData.tc}</p>
-      <p>Başvuru Nedeni: {formData.applicationReason}</p>
-      <p>Adres: {formData.address}</p>
-      <p>Başvuru Detayları: {formData.additionalInfo}</p>
-      <p>Başvuru Kodu: {code}</p>
-    </Box>
+    <div>
+      <Box p={4}>
+        <p className="text-2xl font-bold mb-4">Başvurunuz Başarıyla Alındı!</p>
+        <p>Ad: {formData.name}</p>
+        <p>Soyad: {formData.surname}</p>
+        <p>Age: {formData.age}</p>
+        <p>TC: {formData.tc}</p>
+        <p>Başvuru Nedeni: {formData.applicationReason}</p>
+        <p>Adres: {formData.address}</p>
+        <p>Başvuru Detayları: {formData.additionalInfo}</p>
+        <p>Başvuru Kodu: {code}</p>
+      </Box>
+      <Link to={`/basvuru/${code}`}>
+        <Flex alignItems="center">
+          <Button mr={10}>Kod ile Sorgula</Button>
+        </Flex>
+      </Link>
+      <Link to="#" onClick={handleGoBack}>
+        Go Back
+      </Link>
+    </div>
   );
 };
 

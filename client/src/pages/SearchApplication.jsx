@@ -27,6 +27,10 @@ function SearchApplication() {
     setData({ ...data, applicationCode: value });
   };
 
+  const handleGoBack = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
   return (
     <Box>
       <Heading as="h1" size="lg">
@@ -42,7 +46,7 @@ function SearchApplication() {
               onChange={(e) => setApplicationCode(e.target.value)}
               mr={2}
             />
-            <Link to="/admin">
+            <Link to={`basvuru/${applicationCode}`}>
               <Button onClick={handleSearch}>Sorgula</Button>{" "}
             </Link>
           </Flex>
@@ -53,6 +57,10 @@ function SearchApplication() {
         borderWidth="3px" // Customize the border width
         marginY="13"
       />
+
+      <Link to="#" onClick={handleGoBack}>
+        Go Back
+      </Link>
     </Box>
   );
 }

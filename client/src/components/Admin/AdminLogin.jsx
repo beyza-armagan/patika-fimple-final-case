@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, FormLabel, Input, Button } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function AdminLogin() {
   const [username, setUsername] = useState("kodluyoruz");
@@ -18,6 +18,10 @@ function AdminLogin() {
       // Display an error message for unsuccessful login
       setErrorMessage("Invalid username or password");
     }
+  };
+
+  const handleGoBack = () => {
+    navigate(-1); // Go back to the previous page
   };
 
   return (
@@ -56,6 +60,9 @@ function AdminLogin() {
       {errorMessage && (
         <p style={{ color: "red", textAlign: "center" }}>{errorMessage}</p>
       )}
+      <Link to="#" onClick={handleGoBack}>
+        Go Back
+      </Link>
     </Box>
   );
 }

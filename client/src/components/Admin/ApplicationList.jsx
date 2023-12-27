@@ -1,9 +1,12 @@
 //import { useData } from "../context/DataContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function ApplicationList() {
   const navigate = useNavigate();
 
+  const handleGoBack = () => {
+    navigate(-1); // Go back to the previous page
+  };
   //const { data } = useData();
 
   const dummyData = [
@@ -74,6 +77,10 @@ function ApplicationList() {
           ))}
         </tbody>
       </table>
+
+      <Link to="#" onClick={handleGoBack}>
+        Go Back
+      </Link>
     </div>
   );
 }

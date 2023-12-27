@@ -9,7 +9,7 @@ import CreateApplication from "./pages/CreateApplication";
 import NavBar from "./components/NavBar/NavBar";
 // import ProtectedRoute from "./pages/ProtectedRoute";
 import AdminLogin from "./components/Admin/AdminLogin";
-import ApplicationList from "./pages/ApplicationList";
+import ApplicationList from "./components/Admin/ApplicationList";
 import UpdateApplicationPage from "./components/Admin/UpdateApplicationPage";
 import ApplicationSuccessful from "./pages/ApplicationSuccessful";
 import SearchApplication from "./pages/SearchApplication";
@@ -31,7 +31,7 @@ function App() {
           />
           <Route path="/basvuru-basarili" element={<ApplicationSuccessful />} />
           <Route path="/basvuru-sorgula" element={<SearchApplication />} />
-          <Route path="/basvuru" element={<ApplicationTracking />} />
+          <Route path="/basvuru/:basvuruNo" element={<ApplicationTracking />} />
         </Routes>
       </div>
     </Router>

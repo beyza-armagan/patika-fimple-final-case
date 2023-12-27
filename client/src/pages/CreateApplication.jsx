@@ -20,12 +20,21 @@ export default function CreateApplication() {
   const navigate = useNavigate();
 
   const { setData } = useData();
+  const defaultValues = {
+    name: "John",
+    surname: "Doe",
+    age: 25,
+    tc: "12345678901",
+    applicationReason: "Lorem ipsum dolor sit amet...",
+    address: "123 Main St, City",
+    additionalInfo: "Additional information...",
+  };
 
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({ resolver });
+  } = useForm({ resolver, defaultValues });
 
   const handleFormSubmit = (formData) => {
     setData(formData);
