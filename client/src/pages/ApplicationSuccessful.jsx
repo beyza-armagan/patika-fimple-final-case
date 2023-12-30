@@ -10,7 +10,7 @@ const ApplicationSuccessful = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1); // Go back to the previous page
+    navigate("/basvuru-olustur"); // Go back to the previous page
   };
 
   const location = useLocation();
@@ -33,27 +33,20 @@ const ApplicationSuccessful = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Generate a random application code
+        // generate a random code
         const generatedCode = Math.floor(1000 + Math.random() * 9000);
 
         setCode(generatedCode);
         console.log(generatedCode);
 
-        // Add applicationCode to the form data inside the useEffect callback
         const dataWithCode = {
           ...formData,
           applicationCode: generatedCode,
         };
 
-        // Make a POST request to save the data to the server
-        const response = await axios.post(
-          "http://localhost:3000/basvuru-olustur",
-          dataWithCode
-        );
+        // POST request to save the data
+        await axios.post("http://localhost:3000/basvuru-olustur", dataWithCode);
 
-        console.log("Data saved successfully:", response.data);
-
-        // Update the context or local state if needed
         setData(dataWithCode);
       } catch (error) {
         console.error("Error saving data:", error);

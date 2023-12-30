@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 require("./database/db");
 const ticketRoutes = require("./routes/ticketRoutes");
+const authRoutes = require("./routes/authRoutes");
 const cors = require("cors");
 
 app.use(cors()); // enable CORS for all routes
@@ -13,9 +14,6 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  // Example: Fetch data from MongoDB
-  // const data = await SomeModel.find();
-  // res.json(data);
   res.send("Hello World!");
 });
 

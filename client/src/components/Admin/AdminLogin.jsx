@@ -23,7 +23,7 @@ function AdminLogin() {
 
   return (
     <div>
-      <div className="mx-auto max-w-md p-4 border-1 border-solid border-gray-300 rounded-md shadow-md">
+      <div className="mx-auto max-w-md p-4 border-1 border-solid border-gray-300 rounded-md shadow-md mb-6">
         <h1 className="text-2xl font-bold mb-6">Admin Girişi</h1>
 
         <div className="mb-4">
@@ -40,7 +40,7 @@ function AdminLogin() {
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block font-bold">
-            Password:
+            Parola:
           </label>
           <input
             type="password"
@@ -54,13 +54,12 @@ function AdminLogin() {
           onClick={handleLogin}
           className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 mt-4 rounded"
         >
-          Login
+          Giriş Yap
         </button>
         {errorMessage && (
           <p style={{ color: "red", textAlign: "center" }}>{errorMessage}</p>
         )}
       </div>
-      <hr className="border-blue-500 border-t-3 my-8" />
       <Link
         to="#"
         onClick={handleGoBack}

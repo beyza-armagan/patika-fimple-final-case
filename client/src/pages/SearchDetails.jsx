@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SearchDetails() {
@@ -7,7 +7,25 @@ function SearchDetails() {
   const [applicationDetails, setApplicationDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Cevaplanmadı":
+        return "text-gray font-medium";
+      case "Bekliyor":
+        return "text-yellow-500 font-medium";
+      case "Çözüldü":
+        return "text-green-500 font-medium";
+      case "İptal Edildi":
+        return "text-red-500 font-medium";
+      default:
+        return "";
+    }
+  };
+  const handleGoBack = () => {
+    navigate(-1); // go back to the previous page
+  };
   useEffect(() => {
     const fetchApplicationDetails = async () => {
       try {
@@ -38,12 +56,19 @@ function SearchDetails() {
   }
 
   if (!applicationDetails) {
-    return <p>Bu başvur numarasıyla bir kayıt bulunamadı.</p>;
+    return (
+      <>
+        <p>Bu başvur numarasıyla bir kayıt bulunamadı.</p>;
+        <Link to="#" className="text-blue-500 hover:underline font">
+          Geri Dön
+        </Link>
+      </>
+    );
   }
 
   return (
     <>
-      <div className="max-w-md mx-auto p-4 bg-white rounded shadow-md">
+      <div className="max-w-md mx-auto p-4 bg-white rounded shadow-md mb-6">
         <h2 className="text-2xl font-bold mb-4">Başvuru #{basvuruNo}</h2>
         <div className="mb-2">
           <label className="font-bold">Ad:</label>
@@ -79,10 +104,23 @@ function SearchDetails() {
         </div>
         <div className="mb-2">
           <label className="font-bold">Başvuru Durumu:</label>
-          <span className="ml-2">{applicationDetails.status}</span>
+
+          <span
+            className={`inline-block px-2 py-1 rounded-full ${getStatusColor(
+              applicationDetails.status
+            )}`}
+          >
+            {applicationDetails.status}
+          </span>
         </div>
       </div>
-      <Link to="/basvuru-sorgula">Go Back</Link>
+      <Link
+        to="#"
+        onClick={handleGoBack}
+        className="text-blue-500 hover:underline font"
+      >
+        Geri Dön
+      </Link>
     </>
   );
 }

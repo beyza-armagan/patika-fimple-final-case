@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const ApplicationDetailsModal = ({ application, closeModal }) => {
   return (
-    <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex items-center justify-center text-center">
+    <div className="fixed inset-0 z-50 overflow-auto text-gray-900  bg-gray-800 bg-opacity-50 flex items-center justify-center text-center">
       <div className="bg-white p-8 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">
           Başvuru Detayları #{application.applicationCode}
