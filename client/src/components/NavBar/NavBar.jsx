@@ -7,38 +7,57 @@ function NavBar() {
   const isAdminPage = location.pathname.startsWith("/admin");
 
   return (
-    <nav>
-      <div className="mb-4">
-        <h1 className="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">
-          <span className="underline underline-offset-4 decoration-7 decoration-blue-400 dark:decoration-blue-600">
-            Başvuru Yönetim Sistemi
-          </span>
-        </h1>
+    <nav className="bg-blue-950 ... px-4 py-2 mb-4">
+      <div className="flex justify-between items-center">
+        <div className="mb-4 flex items-center">
+          <img
+            src="../../public/apply.png" // Replace with the actual path to your image
+            alt="Logo"
+            className="w-8 h-8 mr-2 align-middle" // Adjust the size and margin as needed
+            color="white"
+          />
+          <h1 className="mb-4 text-xl sm:text-xl md:text-2xl lg:text-3xl tracking-tight text-white dark:text-white baseline">
+            <span className="underline underline-offset-4 decoration-7 decoration-blue-500 dark:decoration-blue-600">
+              Başvuru Yönetim Sistemi
+            </span>
+          </h1>
+        </div>
+        <div className="flex space-x-4">
+          {isApplicationPage && (
+            <div className="flex items-center">
+              <Link to="/basvuru-sorgula">
+                <button
+                  type="button"
+                  className="bg-blue-500 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded"
+                >
+                  Başvuru Sorgula
+                </button>
+              </Link>
+            </div>
+          )}
+          {isApplicationPage && (
+            <div className="flex items-center">
+              <Link to="/basvuru-olustur">
+                <button
+                  type="button"
+                  className="bg-blue-500 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded"
+                >
+                  Başvuru Oluştur
+                </button>
+              </Link>
+            </div>
+          )}
+          {!isAdminPage && (
+            <div className="flex items-center">
+              <Link to="/admin">
+                <button className="bg-blue-800 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded">
+                  Admin Login
+                </button>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-between items-center">
-        {isApplicationPage && (
-          <div className="mb-4 sm:mb-0">
-            <Link to="/basvuru-sorgula">
-              <button
-                type="button"
-                className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
-              >
-                Başvuru Sorgula
-              </button>
-            </Link>
-          </div>
-        )}
-        {!isAdminPage && (
-          <div>
-            <Link to="/admin">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                Admin Login
-              </button>
-            </Link>
-          </div>
-        )}
-      </div>
-      <hr className="border-blue-500 border-t-1 my-4 sm:my-6" />
     </nav>
   );
 }

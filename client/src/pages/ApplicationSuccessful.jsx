@@ -64,26 +64,57 @@ const ApplicationSuccessful = () => {
   }, [setData, formData]);
 
   return (
-    <div className="p-4">
-      <p className="text-2xl font-bold mb-4">Başvurunuz Başarıyla Alındı!</p>
-      <p>Ad: {formData.name}</p>
-      <p>Soyad: {formData.surname}</p>
-      <p>Age: {formData.age}</p>
-      <p>TC: {formData.tc}</p>
-      <p>Başvuru Nedeni: {formData.applicationReason}</p>
-      <p>Adres: {formData.address}</p>
-      <p>Başvuru Detayları: {formData.additionalInfo}</p>
-      <p>Başvuru Kodu: {code}</p>
+    <>
+      <div className="mx-auto max-w-md p-4 border-1 border-solid border-gray-300 rounded-md shadow-md mb-5">
+        <h1 className="text-2xl font-bold mb-6">
+          Başvurunuz Başarıyla Alındı!
+        </h1>
+        <span className="inline-block px-2 py-1 rounded-full bg-green-500 text-white mb-3">
+          Başvuru Kodunuz: {code}
+        </span>
 
-      <Link to={`/basvuru/${code}`} className="inline-block mt-4">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
-          Kod ile Sorgula
-        </button>
+        <div className="mb-2">
+          <label className="font-bold">Ad: </label>
+          <span className="ml-2">{formData.name}</span>
+        </div>
+        <div className="mb-2">
+          <label className="font-bold">Soyad: </label>
+          <span className="ml-2">{formData.surname}</span>
+        </div>
+
+        <div className="mb-2">
+          <label className="font-bold">Yaş: </label>
+          <span className="ml-2">{formData.age}</span>
+        </div>
+
+        <div className="mb-2">
+          <label className="font-bold">TC: </label>
+          <span className="ml-2">{formData.tc}</span>
+        </div>
+
+        <div className="mb-2">
+          <label className="font-bold">Başvuru Nedeni: </label>
+          <span className="ml-2">{formData.applicationReason}</span>
+        </div>
+        <div className="mb-2">
+          <label className="font-bold">Adres: </label>
+          <span className="ml-2">{formData.address}</span>
+        </div>
+
+        <div className="mb-2">
+          <label className="font-bold">Fotoğraflar/ Ekler: </label>
+          <span className="ml-2">{formData.additionalInfo}</span>
+        </div>
+      </div>
+      <hr className="mx-auto max-w-md border-blue-500 border-t-3 my-8" />
+      <Link
+        to="#"
+        onClick={handleGoBack}
+        className="text-blue-500 hover:underline font"
+      >
+        Geri Dön
       </Link>
-      <Link to="#" onClick={handleGoBack} className="inline-block mt-4">
-        Go Back
-      </Link>
-    </div>
+    </>
   );
 };
 

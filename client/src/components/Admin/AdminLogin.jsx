@@ -24,6 +24,8 @@ function AdminLogin() {
   return (
     <div>
       <div className="mx-auto max-w-md p-4 border-1 border-solid border-gray-300 rounded-md shadow-md">
+        <h1 className="text-2xl font-bold mb-6">Admin Girişi</h1>
+
         <div className="mb-4">
           <label htmlFor="username" className="block font-bold">
             Kullanıcı Adı:
@@ -58,13 +60,13 @@ function AdminLogin() {
           <p style={{ color: "red", textAlign: "center" }}>{errorMessage}</p>
         )}
       </div>
-      <hr className="border-green-500 border-t-3 my-8" />
+      <hr className="border-blue-500 border-t-3 my-8" />
       <Link
         to="#"
         onClick={handleGoBack}
         className="text-blue-500 hover:underline font"
       >
-        Go Back
+        Geri Dön
       </Link>
     </div>
   );
