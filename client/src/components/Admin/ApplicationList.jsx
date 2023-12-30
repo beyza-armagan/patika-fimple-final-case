@@ -1,41 +1,37 @@
 //import { useData } from "../context/DataContext";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function ApplicationList() {
   const navigate = useNavigate();
+  const [applications, setApplications] = useState([]);
 
   const handleGoBack = () => {
     navigate(-1); // Go back to the previous page
   };
-  //const { data } = useData();
 
-  const dummyData = [
-    {
-      applicationNumber: "12345",
-      name: "John",
-      surname: "Doe",
-      age: 25,
-      tc: "12345678901",
-      applicationReason: "Lorem ipsum",
-      address: "123 Main St, City",
-      additionalInfo: "Lorem ipsum additional info",
-    },
-    {
-      applicationNumber: "67890",
-      name: "Jane",
-      surname: "Doe",
-      age: 30,
-      tc: "98765432101",
-      applicationReason: "Dolor sit amet",
-      address: "456 Oak St, Town",
-      additionalInfo: "Dolor sit amet additional info",
-    },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/admin/basvuru-listesi"
+        );
+        console.log(response);
+        setApplications(response.data);
+      } catch (error) {
+        // Handle network error or other exceptions
+        console.error("Error:", error);
+      }
+    };
 
-  const handleUpdate = (applicationNumber) => {
+    fetchData();
+  }, []);
+
+  const handleUpdate = (applicationCode) => {
     // Handle update logic here, e.g., navigate to update page
-    console.log(`Update application with number ${applicationNumber}`);
-    navigate(`/admin/basvuru/${applicationNumber}`);
+    console.log(`Update application with number ${applicationCode}`);
+    navigate(`/admin/basvuru/${applicationCode}`);
   };
 
   return (
@@ -43,6 +39,7 @@ function ApplicationList() {
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr>
+            <th className="border p-2">Status</th>
             <th className="border p-2">Application Number</th>
             <th className="border p-2">Name</th>
             <th className="border p-2">Surname</th>
@@ -55,9 +52,10 @@ function ApplicationList() {
           </tr>
         </thead>
         <tbody>
-          {dummyData.map((application) => (
-            <tr key={application.applicationNumber}>
-              <td className="border p-2">{application.applicationNumber}</td>
+          {applications.map((application) => (
+            <tr key={application.applicationCode}>
+              <td className="border p-2">{application.status}</td>
+              <td className="border p-2">{application.applicationCode}</td>
               <td className="border p-2">{application.name}</td>
               <td className="border p-2">{application.surname}</td>
               <td className="border p-2">{application.age}</td>
@@ -67,7 +65,7 @@ function ApplicationList() {
               <td className="border p-2">{application.additionalInfo}</td>
               <td className="border p-2">
                 <button
-                  onClick={() => handleUpdate(application.applicationNumber)}
+                  onClick={() => handleUpdate(application.applicationCode)}
                   className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                 >
                   Update

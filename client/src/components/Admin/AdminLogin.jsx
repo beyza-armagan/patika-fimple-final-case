@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Box, FormLabel, Input, Button } from "@chakra-ui/react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function AdminLogin() {
   const [username, setUsername] = useState("kodluyoruz");
@@ -9,13 +8,11 @@ function AdminLogin() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    // Check if the entered credentials match the predefined admin credentials
     if (username === "kodluyoruz" && password === "bootcamp109") {
-      // Successful login, navigate to the admin dashboard or desired path
+      // navigate to the admin dashboard or desired path
       console.log("Login successful");
       navigate("/admin/basvuru-listesi");
     } else {
-      // Display an error message for unsuccessful login
       setErrorMessage("Invalid username or password");
     }
   };
@@ -25,45 +22,51 @@ function AdminLogin() {
   };
 
   return (
-    <Box
-      maxW="400px"
-      mx="auto"
-      mt="4"
-      p="6"
-      borderWidth="1px"
-      borderRadius="md"
-      boxShadow="md"
-    >
-      <Box mb="4">
-        <FormLabel htmlFor="username">Kullanıcı Adı:</FormLabel>
-        <Input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          width="100%"
-        />
-      </Box>
-      <Box mb="4">
-        <FormLabel htmlFor="password">Password:</FormLabel>
-        <Input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          width="100%"
-        />
-      </Box>
-      <Button onClick={handleLogin} width="100%">
-        Login
-      </Button>
-      {errorMessage && (
-        <p style={{ color: "red", textAlign: "center" }}>{errorMessage}</p>
-      )}
-      <Link to="#" onClick={handleGoBack}>
+    <div>
+      <div className="mx-auto max-w-md p-4 border-1 border-solid border-gray-300 rounded-md shadow-md">
+        <div className="mb-4">
+          <label htmlFor="username" className="block font-bold">
+            Kullanıcı Adı:
+          </label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="password" className="block font-bold">
+            Password:
+          </label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <button
+          onClick={handleLogin}
+          className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 mt-4 rounded"
+        >
+          Login
+        </button>
+        {errorMessage && (
+          <p style={{ color: "red", textAlign: "center" }}>{errorMessage}</p>
+        )}
+      </div>
+      <hr className="border-green-500 border-t-3 my-8" />
+      <Link
+        to="#"
+        onClick={handleGoBack}
+        className="text-blue-500 hover:underline font"
+      >
         Go Back
       </Link>
-    </Box>
+    </div>
   );
 }
 

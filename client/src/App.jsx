@@ -14,6 +14,7 @@ import UpdateApplicationPage from "./components/Admin/UpdateApplicationPage";
 import ApplicationSuccessful from "./pages/ApplicationSuccessful";
 import SearchApplication from "./pages/SearchApplication";
 import ApplicationTracking from "./pages/ApplicationTracking";
+import SearchDetails from "./pages/SearchDetails";
 
 function App() {
   return (
@@ -32,6 +33,10 @@ function App() {
           <Route path="/basvuru-basarili" element={<ApplicationSuccessful />} />
           <Route path="/basvuru-sorgula" element={<SearchApplication />} />
           <Route path="/basvuru/:basvuruNo" element={<ApplicationTracking />} />
+          <Route
+            path="/basvuru-sorgula/basvuru/:basvuruNo"
+            element={<SearchDetails />}
+          />
         </Routes>
       </div>
     </Router>

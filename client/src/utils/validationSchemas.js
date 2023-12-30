@@ -19,7 +19,7 @@ export const applicationForm = yup.object().shape({
   additionalInfo: yup.string().required("Bu alan zorunludur."),
 });
 
-export const applicationResultsForm = yup.object().shape({
+export const adminLoginForm = yup.object().shape({
   username: yup.string().required("Bu alan zorunludur"),
   password: yup
     .string()

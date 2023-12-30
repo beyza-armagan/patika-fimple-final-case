@@ -1,13 +1,3 @@
-import {
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
-  Button,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
 import { useForm, Controller } from "react-hook-form";
 import { applicationForm } from "../utils/validationSchemas";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,6 +11,7 @@ export default function CreateApplication() {
 
   const { setData } = useData();
   const defaultValues = {
+    //default values for ticket creation
     name: "John",
     surname: "Doe",
     age: 25,
@@ -36,189 +27,215 @@ export default function CreateApplication() {
     formState: { errors },
   } = useForm({ resolver, defaultValues });
 
-  const handleFormSubmit = (formData) => {
+  const handleFormSubmit = async (formData) => {
     setData(formData);
     navigate("/basvuru-basarili", { state: { formData } });
-    console.log("Form submitted:", formData);
   };
 
   return (
-    <Box p={4}>
+    <div className="mx-auto max-w-md p-4 border-1 border-solid border-gray-300 rounded-md shadow-md">
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-          <GridItem colSpan={1}>
-            <FormControl isInvalid={!!errors.name}>
-              <FormLabel htmlFor="name">Ad</FormLabel>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    type="text"
-                    id="name"
-                    placeholder="Lütfen adınızı girin"
-                    value={field.value || ""}
-                  />
-                )}
-              />
-              {errors.name && (
-                <Box color="red.500" textAlign="right">
-                  {errors.name.message}
-                </Box>
+        <div className="grid grid-cols-2 gap-4">
+          <div
+            className={`mb-4 ${errors.name ? "text-red-500 text-center" : ""}`}
+          >
+            <label htmlFor="name" className="block font-bold">
+              Ad
+            </label>
+            <Controller
+              name="name"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="text"
+                  id="name"
+                  placeholder="Lütfen adınızı girin"
+                  value={field.value || ""}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
               )}
-            </FormControl>
-          </GridItem>
-
-          <GridItem colSpan={1}>
-            <FormControl isInvalid={!!errors.surname}>
-              <FormLabel htmlFor="surname">Soyad</FormLabel>
-              <Controller
-                name="surname"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    id="surname"
-                    type="text"
-                    placeholder="Lütfen soyadınızı girin"
-                    value={field.value || ""}
-                  />
-                )}
-              />
-              {errors.surname && (
-                <Box color="red.500" textAlign="right">
-                  {errors.surname.message}
-                </Box>
+            />
+            {errors.name && <div>{errors.name.message}</div>}
+          </div>
+          <div
+            className={`mb-4 ${
+              errors.surname ? "text-red-500 text-right" : ""
+            }`}
+          >
+            <label htmlFor="surname" className="block font-bold">
+              Soyad
+            </label>
+            <Controller
+              name="surname"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  id="surname"
+                  type="text"
+                  placeholder="Lütfen soyadınızı girin"
+                  value={field.value || ""}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
               )}
-            </FormControl>
-          </GridItem>
+            />
+            {errors.surname && (
+              <div className="text-red-500 text-right">
+                {errors.surname.message}
+              </div>
+            )}
+          </div>
 
-          <GridItem colSpan={1}>
-            <FormControl isInvalid={!!errors.age}>
-              <FormLabel htmlFor="age">Yaş</FormLabel>
-              <Controller
-                name="age"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    id="age"
-                    type="text"
-                    placeholder="Lütfen yaşınızı girin"
-                    value={field.value || ""}
-                  />
-                )}
-              />
-              {errors.age && (
-                <Box color="red.500" textAlign="right">
-                  {errors.age.message}
-                </Box>
+          <div
+            className={`col-span-1 ${
+              errors.age ? "text-red-500 text-right" : ""
+            }`}
+          >
+            <label htmlFor="age" className="block font-bold">
+              Yaş
+            </label>
+            <Controller
+              name="age"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  id="age"
+                  type="text"
+                  placeholder="Lütfen yaşınızı girin"
+                  value={field.value || ""}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
               )}
-            </FormControl>
-          </GridItem>
+            />
+            {errors.age && (
+              <div className="text-red-500 text-right">
+                {errors.age.message}
+              </div>
+            )}
+          </div>
 
-          <GridItem colSpan={1}>
-            <FormControl isInvalid={!!errors.tc}>
-              <FormLabel htmlFor="tc">TC</FormLabel>
+          <div className="col-span-1">
+            <div
+              className={`mb-4 ${errors.tc ? "text-red-500 text-right" : ""}`}
+            >
+              <label htmlFor="tc" className="block font-bold">
+                TC
+              </label>
               <Controller
                 name="tc"
                 control={control}
                 render={({ field }) => (
-                  <Input
+                  <input
                     {...field}
                     id="tc"
                     type="text"
                     placeholder="Lütfen TC numarası girin"
                     value={field.value || ""}
+                    className="w-full p-2 border border-gray-300 rounded"
                   />
                 )}
               />
-              {errors.tc && (
-                <Box color="red.500" textAlign="right">
-                  {errors.tc.message}
-                </Box>
-              )}
-            </FormControl>
-          </GridItem>
+              {errors.tc && <div>{errors.tc.message}</div>}
+            </div>
+          </div>
 
-          <GridItem colSpan={2}>
-            <FormControl isInvalid={!!errors.applicationReason}>
-              <FormLabel htmlFor="applicationReason">Başvuru Nedeni</FormLabel>
+          <div className="col-span-2">
+            <div
+              className={`mb-4 ${
+                errors.applicationReason ? "text-red-500 text-right" : ""
+              }`}
+            >
+              <label htmlFor="applicationReason" className="block font-bold">
+                Başvuru Nedeni
+              </label>
               <Controller
                 name="applicationReason"
                 control={control}
                 render={({ field }) => (
                   <>
-                    <Textarea
+                    <textarea
                       {...field}
                       id="applicationReason"
                       placeholder="Lütfen başvuru nedeninizi yazın"
                       value={field.value || ""}
+                      className="w-full p-2 border border-gray-300 rounded"
                     />
                     {errors.applicationReason && (
-                      <Box color="red.500" textAlign="right">
-                        {errors.applicationReason.message}
-                      </Box>
+                      <div>{errors.applicationReason.message}</div>
                     )}
                   </>
                 )}
               />
-            </FormControl>
-          </GridItem>
+            </div>
+          </div>
 
-          <GridItem colSpan={2}>
-            <FormControl isInvalid={!!errors.address}>
-              <FormLabel htmlFor="address">Adres Bilgisi</FormLabel>
-              <Controller
-                name="address"
-                control={control}
-                render={({ field }) => (
-                  <Textarea
-                    {...field}
-                    id="address"
-                    placeholder="Lütfen adresinizi yazın"
-                    value={field.value || ""}
-                  />
-                )}
-              />
-              {errors.address && (
-                <Box color="red.500" textAlign="right">
-                  {errors.address.message}
-                </Box>
+          <div
+            className={`col-span-2 ${
+              errors.address ? "text-red-500 text-right" : ""
+            }`}
+          >
+            <label htmlFor="address" className="block font-bold">
+              Adres Bilgisi
+            </label>
+            <Controller
+              name="address"
+              control={control}
+              render={({ field }) => (
+                <textarea
+                  {...field}
+                  id="address"
+                  placeholder="Lütfen adresinizi yazın"
+                  value={field.value || ""}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
               )}
-            </FormControl>
-          </GridItem>
+            />
+            {errors.address && (
+              <div className="text-red-500 text-right">
+                {errors.address.message}
+              </div>
+            )}
+          </div>
 
-          <GridItem colSpan={2}>
-            <FormControl isInvalid={!!errors.additionalInfo}>
-              <FormLabel htmlFor="additionalInfo">Fotoğraflar/Ekler</FormLabel>
+          <div className="col-span-2">
+            <div
+              className={`mb-4 ${
+                errors.additionalInfo ? "text-red-500 text-right" : ""
+              }`}
+            >
+              <label htmlFor="additionalInfo" className="block font-bold">
+                Fotoğraflar/Ekler
+              </label>
               <Controller
                 name="additionalInfo"
                 control={control}
                 render={({ field }) => (
-                  <Input
+                  <input
                     {...field}
                     type="text"
                     id="additionalInfo"
-                    placeholder="Lütfen eklemek istediklerinizi yazınız"
+                    placeholder="Lütfen fotoğraflar/ekler bilgisi girin"
                     value={field.value || ""}
+                    className="w-full p-2 border border-gray-300 rounded"
                   />
                 )}
               />
               {errors.additionalInfo && (
-                <Box color="red.500" textAlign="right">
-                  {errors.additionalInfo.message}
-                </Box>
+                <div>{errors.additionalInfo.message}</div>
               )}
-            </FormControl>
-          </GridItem>
-        </Grid>
+            </div>
+          </div>
+        </div>
 
-        <Button type="submit" colorScheme="blue" mt={4}>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 mt-4 rounded"
+        >
           Gönder
-        </Button>
+        </button>
       </form>
-    </Box>
+    </div>
   );
 }
