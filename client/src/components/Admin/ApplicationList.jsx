@@ -29,7 +29,7 @@ function ApplicationList() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/admin/basvuru-listesi"
+          "https://ticketsystem-ts7l.onrender.com/admin/basvuru-listesi"
         );
         console.log(response);
         setApplications(response.data);

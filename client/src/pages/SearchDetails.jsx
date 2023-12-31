@@ -30,7 +30,7 @@ function SearchDetails() {
     const fetchApplicationDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/basvuru-sorgula/basvuru/${basvuruNo}`
+          `https://ticketsystem-ts7l.onrender.com/basvuru-sorgula/basvuru/${basvuruNo}`
         );
         setApplicationDetails(response.data);
       } catch (error) {

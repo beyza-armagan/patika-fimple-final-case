@@ -25,7 +25,7 @@ function UpdateApplicationPage() {
     const fetchTicketInfo = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/basvuru/${basvuruNo}`
+          `https://ticketsystem-ts7l.onrender.com/basvuru/${basvuruNo}`
         );
         setTicketInfo(response.data);
       } catch (error) {
@@ -38,10 +38,13 @@ function UpdateApplicationPage() {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`http://localhost:3000/admin/basvuru/${basvuruNo}`, {
-        adminResponse,
-        status,
-      });
+      await axios.put(
+        `https://ticketsystem-ts7l.onrender.com/admin/basvuru/${basvuruNo}`,
+        {
+          adminResponse,
+          status,
+        }
+      );
 
       navigate(-1);
     } catch (error) {

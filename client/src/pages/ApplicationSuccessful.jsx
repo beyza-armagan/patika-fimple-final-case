@@ -48,7 +48,10 @@ const ApplicationSuccessful = () => {
         };
 
         // POST request to save the data
-        await axios.post("http://localhost:3000/basvuru-olustur", dataWithCode);
+        await axios.post(
+          "https://ticketsystem-ts7l.onrender.com/basvuru-olustur",
+          dataWithCode
+        );
 
         setData(dataWithCode);
       } catch (error) {

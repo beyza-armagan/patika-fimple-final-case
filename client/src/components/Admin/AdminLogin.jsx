@@ -10,10 +10,13 @@ function AdminLogin() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/admin-login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://ticketsystem-ts7l.onrender.com/admin-login",
+        {
+          username,
+          password,
+        }
+      );
       console.log(response);
       console.log("Login successful");
       sessionStorage.setItem("accessToken", response.data.accessToken);
