@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
+import mongoose from "mongoose";
+//const jwt = require("jsonwebtoken");
 
-const bcrypt = require("bcryptjs");
+//const bcrypt = require("bcryptjs");
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -14,8 +14,16 @@ const userSchema = mongoose.Schema({
     required: true,
     minLength: 8,
   },
+  token: {
+    type: String,
+    required: false,
+    // minLength: 8,
+  },
 });
+/* 
+userSchema.pre("save", async function(next) {
+  const salt = await bcrypt.genSalt()
+  this.password = await b
+}) */
 
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+export const User = mongoose.model("User", userSchema);

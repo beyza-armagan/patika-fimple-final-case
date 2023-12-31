@@ -34,7 +34,7 @@ const ApplicationDetailsModal = ({ application, closeModal }) => {
         </div>
         <div className="mb-2">
           <label className="font-bold">Fotoğraflar/ Ekler:</label>
-          <span className="ml-2">{application.additionalInfo}</span>
+          <img src={application.image} />
         </div>
         <div className="mb-2">
           <label className="font-bold">Başvuru Durumu:</label>

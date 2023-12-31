@@ -3,6 +3,7 @@ import { applicationForm } from "../utils/validationSchemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useData } from "../context/DataContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const resolver = yupResolver(applicationForm);
 
@@ -10,6 +11,7 @@ export default function CreateApplication() {
   const navigate = useNavigate();
 
   const { setData } = useData();
+  const [file, setFile] = useState("");
   const defaultValues = {
     //default values for ticket creation
     name: "John",
@@ -18,23 +20,42 @@ export default function CreateApplication() {
     tc: "12345678901",
     applicationReason: "Lorem ipsum dolor sit amet...",
     address: "123 Main St, City",
-    additionalInfo: "Additional information...",
+    file: "",
+    // additionalInfo: "",
   };
 
   const {
     handleSubmit,
     control,
+    register,
     formState: { errors },
   } = useForm({ resolver, defaultValues });
 
   const handleFormSubmit = async (formData) => {
-    setData(formData);
-    navigate("/basvuru-basarili", { state: { formData } });
+    console.log("form data");
+    console.log(formData);
+    setData({ ...formData });
+    navigate("/basvuru-basarili", { state: { formData, file } });
+  };
+
+  const getBase64 = (file) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+      setFile(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
   };
 
   return (
     <div className="mx-auto max-w-md p-4 border-1 border-solid border-gray-300 rounded-md shadow-md">
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
+      <form
+        onSubmit={handleSubmit(handleFormSubmit)}
+        encType="multipart/form-data"
+      >
         <div className="grid grid-cols-2 gap-4">
           <div
             className={`mb-4 ${errors.name ? "text-red-500 text-center" : ""}`}
@@ -203,25 +224,27 @@ export default function CreateApplication() {
             <div
               className={`mb-4 ${
                 errors.additionalInfo ? "text-red-500 text-right" : ""
-              }`}
+              } flex items-center justify-center w-full`}
             >
               <label htmlFor="additionalInfo" className="block font-bold">
                 Fotoğraflar/Ekler
               </label>
-              <Controller
-                name="additionalInfo"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    {...field}
-                    type="text"
-                    id="additionalInfo"
-                    placeholder="Lütfen fotoğraflar/ekler bilgisi girin"
-                    value={field.value || ""}
-                    className="w-full p-2 border border-gray-300 rounded"
-                  />
-                )}
+
+              <input
+                {...register("file")}
+                type="file"
+                name="file"
+                id="file"
+                onChange={(event) => {
+                  // setData({ ...data, file: event.target.files[0] });
+                  getBase64(event.target.files[0]);
+                  // console.log(event.target.files[0]);
+                  // onChange(event.target.files[0]);
+                }}
+                placeholder="Lütfen fotoğraflar/ekler bilgisi girin"
+                // className="hidden"
               />
+
               {errors.additionalInfo && (
                 <div>{errors.additionalInfo.message}</div>
               )}

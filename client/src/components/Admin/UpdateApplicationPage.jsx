@@ -16,6 +16,12 @@ function UpdateApplicationPage() {
   };
 
   useEffect(() => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    console.log("accessToken", accessToken);
+    if (!accessToken) {
+      navigate("/admin");
+    }
+
     const fetchTicketInfo = async () => {
       try {
         const response = await axios.get(

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -7,12 +8,19 @@ function AdminLogin() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (username === "kodluyoruz" && password === "bootcamp109") {
-      // navigate to the admin dashboard or desired path
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/admin-login", {
+        username,
+        password,
+      });
+      console.log(response);
       console.log("Login successful");
+      sessionStorage.setItem("accessToken", response.data.accessToken);
+      sessionStorage.setItem("refreshToken", response.data.refreshToken);
       navigate("/admin/basvuru-listesi");
-    } else {
+    } catch (error) {
+      console.error("Error:", error);
       setErrorMessage("Invalid username or password");
     }
   };

@@ -1,9 +1,12 @@
-const Ticket = require("../models/ticketSchema");
+import multer from "multer";
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+import { Ticket } from "../models/ticketSchema.js";
+import { Image } from "../models/imageSchema.js";
 
-const applicationController = {
+export const ticketController = {
   createTicket: async (req, res) => {
     try {
-      // extract application data from the request body
       const {
         name,
         surname,
@@ -11,11 +14,10 @@ const applicationController = {
         tc,
         applicationReason,
         address,
-        additionalInfo,
         applicationCode,
+        file,
       } = req.body;
 
-      // create a new application instance
       const newTicket = new Ticket({
         name,
         surname,
@@ -23,16 +25,15 @@ const applicationController = {
         tc,
         applicationReason,
         address,
-        additionalInfo,
         applicationCode,
+        image: file,
       });
 
-      // Save the application to the database
       await newTicket.save();
 
       console.log("Application saved successfully");
 
-      // respond with a success message and the application details
+      // respond with a success message and the ticket details
       res.status(201).json({
         message: "Application created successfully",
         ticket: newTicket,
@@ -100,5 +101,3 @@ const applicationController = {
     }
   },
 };
-
-module.exports = applicationController;

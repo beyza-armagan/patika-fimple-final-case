@@ -1,16 +1,21 @@
-const express = require("express");
-const ticketController = require("../controllers/ticketController");
-const router = express.Router();
+import express from "express";
 
-router.get("/basvuru/:basvuruNo", ticketController.getTicket);
-router.post("/basvuru-olustur", ticketController.createTicket);
-router.get("/admin/basvuru-listesi", ticketController.getAllTickets);
-router.get("/admin/basvuru/:basvuruNo", ticketController.getTicket);
-router.put("/admin/basvuru/:basvuruNo", ticketController.respondToTicket);
-router.get("/basvuru-sorgula/basvuru/:basvuruNo", ticketController.getTicket);
-router.post(
+const ticketRoutes = express.Router();
+import { ticketController } from "../controllers/ticketController.js";
+
+ticketRoutes.post("/basvuru-olustur", ticketController.createTicket);
+
+ticketRoutes.get("/basvuru/:basvuruNo", ticketController.getTicket);
+ticketRoutes.get("/admin/basvuru-listesi", ticketController.getAllTickets);
+ticketRoutes.get("/admin/basvuru/:basvuruNo", ticketController.getTicket);
+ticketRoutes.put("/admin/basvuru/:basvuruNo", ticketController.respondToTicket);
+ticketRoutes.get(
+  "/basvuru-sorgula/basvuru/:basvuruNo",
+  ticketController.getTicket
+);
+ticketRoutes.post(
   "http://localhost:3000/basvuru-basarili",
   ticketController.createTicket
 );
 
-module.exports = router;
+export default ticketRoutes;

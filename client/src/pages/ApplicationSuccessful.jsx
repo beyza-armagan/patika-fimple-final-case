@@ -19,13 +19,13 @@ const ApplicationSuccessful = () => {
   const formData = useMemo(
     () =>
       location.state?.formData || {
-        name: formData.name,
-        surname: formData.surname,
-        age: formData.age,
-        tc: formData.tc,
-        applicationReason: formData.applicationReason,
-        address: formData.address,
-        additionalInfo: formData.additionalInfo,
+        name: "",
+        surname: "",
+        age: "",
+        tc: "",
+        applicationReason: "",
+        address: "",
+        // additionalInfo: formData.additionalInfo,
       },
     [location.state]
   );
@@ -33,6 +33,8 @@ const ApplicationSuccessful = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const file = location.state?.file;
+        console.log(">> file", file);
         // generate a random code
         const generatedCode = Math.floor(1000 + Math.random() * 9000);
 
@@ -41,6 +43,7 @@ const ApplicationSuccessful = () => {
 
         const dataWithCode = {
           ...formData,
+          file,
           applicationCode: generatedCode,
         };
 
@@ -96,7 +99,7 @@ const ApplicationSuccessful = () => {
 
         <div className="mb-2">
           <label className="font-bold">Fotoğraflar/ Ekler: </label>
-          <span className="ml-2">{formData.additionalInfo}</span>
+          <img src={location.state?.file} />
         </div>
       </div>
       <hr className="mx-auto max-w-md border-blue-500 border-t-3 my-8" />

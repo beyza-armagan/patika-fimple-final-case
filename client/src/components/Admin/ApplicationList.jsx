@@ -21,6 +21,11 @@ function ApplicationList() {
   };
 
   useEffect(() => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    if (!accessToken) {
+      navigate("/admin");
+    }
+
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -131,7 +136,9 @@ function ApplicationList() {
                 <td className="px-6 py-4">{application.tc}</td>
                 <td className="px-6 py-4">{application.applicationReason}</td>
                 <td className="px-6 py-4">{application.address}</td>
-                <td className="px-6 py-4">{application.additionalInfo}</td>
+                <td className="px-6 py-4">
+                  <img src={application.image} />
+                </td>
                 <td className="px-6 py-4">
                   <button
                     onClick={() => handleViewDetails(application)}

@@ -1,9 +1,16 @@
-const router = require("express").Router();
-const authController = require("../controllers/authController");
+import express from "express";
+import {
+  login_get,
+  login_post,
+  logout_get,
+} from "../controllers/authController.js";
 
-router.get("/admin/basvuru-listesi", authController.login_get);
-router.post("/admin/basvuru-listesi", authController.login_post);
+const authRoutes = express.Router();
 
-router.get("/admin-logout", authController.logout_get);
+// authRoutes.get("/admin/basvuru-listesi", login_get);
+// authRoutes.post("/admin/basvuru-listesi", login_post);
 
-module.exports = router;
+authRoutes.post("/admin-login", login_post);
+authRoutes.get("/admin-logout", logout_get);
+
+export default authRoutes;

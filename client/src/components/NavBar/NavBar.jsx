@@ -4,10 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 function NavBar() {
   const location = useLocation();
   const isApplicationPage = location.pathname.startsWith("/basvuru");
-  const isAdminPage = location.pathname.startsWith("/admin");
+  // const isAdminPage = location.pathname.startsWith("/admin");
+  const accessToken = sessionStorage.getItem("accessToken");
 
   return (
-    <nav className="bg-blue-950 ... px-4 py-2 mb-4">
+    <nav className="bg-blue-950 ... px-4 py-2 mb-4 ">
       <div className="flex justify-between items-center">
         <div className="mb-4 flex items-center">
           <img
@@ -16,13 +17,27 @@ function NavBar() {
             className="w-8 h-8 mr-2 align-middle" // Adjust the size and margin as needed
             color="white"
           />
-          <h1 className="mb-4 text-xl sm:text-xl md:text-2xl lg:text-3xl tracking-tight text-white dark:text-white baseline">
-            <span className="underline underline-offset-4 decoration-7 decoration-blue-500 dark:decoration-blue-600">
-              Başvuru Yönetim Sistemi
-            </span>
-          </h1>
+          <Link to="/basvuru-olustur">
+            <h1 className="mb-4 text-xl sm:text-xl md:text-2xl lg:text-3xl tracking-tight text-white dark:text-white baseline">
+              <span className="underline underline-offset-4 decoration-7 decoration-blue-500 dark:decoration-blue-600">
+                Başvuru Yönetim Sistemi
+              </span>
+            </h1>
+          </Link>
         </div>
         <div className="flex space-x-4">
+          {accessToken && (
+            <div className="flex items-center">
+              <Link to="/admin/basvuru-listesi">
+                <button
+                  type="button"
+                  className="bg-blue-500 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded"
+                >
+                  Admin Paneli
+                </button>
+              </Link>
+            </div>
+          )}
           {isApplicationPage && (
             <div className="flex items-center">
               <Link to="/basvuru-sorgula">
@@ -47,11 +62,26 @@ function NavBar() {
               </Link>
             </div>
           )}
-          {!isAdminPage && (
+          {!accessToken && (
             <div className="flex items-center">
               <Link to="/admin">
                 <button className="bg-blue-800 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded">
-                  Admin Login
+                  Admin Giriş
+                </button>
+              </Link>
+            </div>
+          )}
+          {accessToken && (
+            <div className="flex items-center">
+              <Link
+                to="/"
+                onClick={() => (
+                  sessionStorage.removeItem("accessToken"),
+                  sessionStorage.removeItem("refreshToken")
+                )}
+              >
+                <button className="bg-blue-800 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded">
+                  Çıkış
                 </button>
               </Link>
             </div>

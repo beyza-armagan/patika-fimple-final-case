@@ -52,14 +52,15 @@ function SearchDetails() {
   }
 
   if (error) {
-    return <p>{error}</p>;
-  }
-
-  if (!applicationDetails) {
     return (
       <>
-        <p>Bu başvur numarasıyla bir kayıt bulunamadı.</p>;
-        <Link to="#" className="text-blue-500 hover:underline font">
+        <p className="text-xl font-bold mb-4">404</p>
+        <p className="text-l font-bold mb-4">{error}</p>
+        <Link
+          to="#"
+          onClick={handleGoBack}
+          className="text-blue-500 hover:underline font"
+        >
           Geri Dön
         </Link>
       </>
@@ -96,7 +97,9 @@ function SearchDetails() {
         </div>
         <div className="mb-2">
           <label className="font-bold">Fotoğraflar/Ekler:</label>
-          <span className="ml-2">{applicationDetails.additionalInfo}</span>
+          <span className="ml-2">
+            <img src={applicationDetails.image} />
+          </span>
         </div>
         <div className="mb-2">
           <label className="font-bold">Başvuru Cevabı:</label>
