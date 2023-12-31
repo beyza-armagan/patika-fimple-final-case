@@ -16,6 +16,7 @@ export const ticketController = {
         address,
         applicationCode,
         file,
+        date,
       } = req.body;
 
       const newTicket = new Ticket({
@@ -27,6 +28,7 @@ export const ticketController = {
         address,
         applicationCode,
         image: file,
+        date,
       });
 
       await newTicket.save();

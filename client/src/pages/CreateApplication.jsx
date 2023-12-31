@@ -35,7 +35,7 @@ export default function CreateApplication() {
     const currentDate = new Date();
 
     const formattedDate = currentDate.toISOString();
-
+    console.log(formattedDate);
     formData.date = formattedDate;
 
     setData({ ...formData });
@@ -238,9 +238,6 @@ export default function CreateApplication() {
             >
               SVG, PNG or JPG (MAX. 800x400px, 10MB).
             </p>
-            {errors.file && (
-              <div className="text-red-500">{errors.file.message}</div>
-            )}
           </div>
         </div>
 
