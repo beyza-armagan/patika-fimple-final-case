@@ -14,14 +14,14 @@ export default function CreateApplication() {
   const [file, setFile] = useState("");
   const defaultValues = {
     //default values for ticket creation
-    name: "John",
-    surname: "Doe",
-    age: 25,
-    tc: "12345678901",
-    applicationReason: "Lorem ipsum dolor sit amet...",
-    address: "123 Main St, City",
+    name: "",
+    surname: "",
+    age: "",
+    tc: "",
+    applicationReason: "",
+    address: "",
     file: "",
-    // additionalInfo: "",
+    date: "",
   };
 
   const {
@@ -32,8 +32,12 @@ export default function CreateApplication() {
   } = useForm({ resolver, defaultValues });
 
   const handleFormSubmit = async (formData) => {
-    console.log("form data");
-    console.log(formData);
+    const currentDate = new Date();
+
+    const formattedDate = currentDate.toISOString();
+
+    formData.date = formattedDate;
+
     setData({ ...formData });
     navigate("/basvuru-basarili", { state: { formData, file } });
   };
@@ -52,14 +56,13 @@ export default function CreateApplication() {
 
   return (
     <div className="mx-auto max-w-md p-4 border-1 border-solid border-gray-300 rounded-md shadow-md">
+      <h1 className="text-2xl font-bold mb-6">Başvuru Formu</h1>
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
         encType="multipart/form-data"
       >
-        <div className="grid grid-cols-2 gap-4">
-          <div
-            className={`mb-4 ${errors.name ? "text-red-500 text-center" : ""}`}
-          >
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2">
+          <div>
             <label htmlFor="name" className="block font-bold">
               Ad
             </label>
@@ -77,13 +80,14 @@ export default function CreateApplication() {
                 />
               )}
             />
-            {errors.name && <div>{errors.name.message}</div>}
+            {errors.name && (
+              <div className="text-red-500 text-center">
+                {errors.name.message}
+              </div>
+            )}
           </div>
-          <div
-            className={`mb-4 ${
-              errors.surname ? "text-red-500 text-right" : ""
-            }`}
-          >
+
+          <div>
             <label htmlFor="surname" className="block font-bold">
               Soyad
             </label>
@@ -102,17 +106,13 @@ export default function CreateApplication() {
               )}
             />
             {errors.surname && (
-              <div className="text-red-500 text-right">
+              <div className="text-red-500 text-center">
                 {errors.surname.message}
               </div>
             )}
           </div>
 
-          <div
-            className={`col-span-1 ${
-              errors.age ? "text-red-500 text-right" : ""
-            }`}
-          >
+          <div>
             <label htmlFor="age" className="block font-bold">
               Yaş
             </label>
@@ -131,72 +131,64 @@ export default function CreateApplication() {
               )}
             />
             {errors.age && (
-              <div className="text-red-500 text-right">
+              <div className="text-red-500 text-center">
                 {errors.age.message}
               </div>
             )}
           </div>
 
-          <div className="col-span-1">
-            <div
-              className={`mb-4 ${errors.tc ? "text-red-500 text-right" : ""}`}
-            >
-              <label htmlFor="tc" className="block font-bold">
-                TC
-              </label>
-              <Controller
-                name="tc"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    {...field}
-                    id="tc"
-                    type="text"
-                    placeholder="Lütfen TC numarası girin"
-                    value={field.value || ""}
-                    className="w-full p-2 border border-gray-300 rounded"
-                  />
-                )}
-              />
-              {errors.tc && <div>{errors.tc.message}</div>}
-            </div>
+          <div>
+            <label htmlFor="tc" className="block font-bold">
+              TC
+            </label>
+            <Controller
+              name="tc"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  id="tc"
+                  type="text"
+                  placeholder="Lütfen TC numarası girin"
+                  value={field.value || ""}
+                  className="w-full p-2 border border-gray-300 rounded"
+                />
+              )}
+            />
+            {errors.tc && (
+              <div className="text-red-500 text-center">
+                {errors.tc.message}
+              </div>
+            )}
           </div>
 
           <div className="col-span-2">
-            <div
-              className={`mb-4 ${
-                errors.applicationReason ? "text-red-500 text-right" : ""
-              }`}
-            >
-              <label htmlFor="applicationReason" className="block font-bold">
-                Başvuru Nedeni
-              </label>
-              <Controller
-                name="applicationReason"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <textarea
-                      {...field}
-                      id="applicationReason"
-                      placeholder="Lütfen başvuru nedeninizi yazın"
-                      value={field.value || ""}
-                      className="w-full p-2 border border-gray-300 rounded"
-                    />
-                    {errors.applicationReason && (
-                      <div>{errors.applicationReason.message}</div>
-                    )}
-                  </>
-                )}
-              />
-            </div>
+            <label htmlFor="applicationReason" className="block font-bold">
+              Başvuru Nedeni
+            </label>
+            <Controller
+              name="applicationReason"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <textarea
+                    {...field}
+                    id="applicationReason"
+                    placeholder="Lütfen başvuru nedeninizi yazın"
+                    value={field.value || ""}
+                    className="w-full p-2 border border-gray-300 rounded"
+                  />
+                  {errors.applicationReason && (
+                    <div className="text-red-500 text-center">
+                      {errors.applicationReason.message}
+                    </div>
+                  )}
+                </>
+              )}
+            />
           </div>
 
-          <div
-            className={`col-span-2 ${
-              errors.address ? "text-red-500 text-right" : ""
-            }`}
-          >
+          <div className="col-span-2">
             <label htmlFor="address" className="block font-bold">
               Adres Bilgisi
             </label>
@@ -214,41 +206,41 @@ export default function CreateApplication() {
               )}
             />
             {errors.address && (
-              <div className="text-red-500 text-right">
+              <div className="text-red-500 text-center">
                 {errors.address.message}
               </div>
             )}
           </div>
 
           <div className="col-span-2">
-            <div
-              className={`mb-4 ${
-                errors.additionalInfo ? "text-red-500 text-right" : ""
-              } flex items-center justify-center w-full`}
-            >
-              <label htmlFor="additionalInfo" className="block font-bold">
-                Fotoğraflar/Ekler
-              </label>
-
+            <label htmlFor="file" className="block font-bold mb-2">
+              Fotoğraflar:
+            </label>
+            <div className="mx-auto max-w-[400px]">
               <input
                 {...register("file")}
+                className="block w-full text-sm text-slate-500
+                           file:mr-4 file:py-2 file:px-4 file:rounded-md
+                           file:border-0 file:text-sm file:font-semibold
+                           file:bg-[#dbeafe] file:text-blue-700
+                           hover:file:bg-blue-400 "
                 type="file"
                 name="file"
                 id="file"
                 onChange={(event) => {
-                  // setData({ ...data, file: event.target.files[0] });
                   getBase64(event.target.files[0]);
-                  // console.log(event.target.files[0]);
-                  // onChange(event.target.files[0]);
                 }}
-                placeholder="Lütfen fotoğraflar/ekler bilgisi girin"
-                // className="hidden"
               />
-
-              {errors.additionalInfo && (
-                <div>{errors.additionalInfo.message}</div>
-              )}
             </div>
+            <p
+              className="mt-4 mb-1 text-sm text-gray-500 dark:text-gray-300"
+              id="file_input_help"
+            >
+              SVG, PNG or JPG (MAX. 800x400px, 10MB).
+            </p>
+            {errors.file && (
+              <div className="text-red-500">{errors.file.message}</div>
+            )}
           </div>
         </div>
 

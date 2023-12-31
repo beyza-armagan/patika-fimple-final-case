@@ -18,6 +18,10 @@ const ticketSchema = new mongoose.Schema({
     default: "Cevaplanmadı", //"Bekliyor" // "Çözüldü" // "İptal Edildi"
   },
   adminResponse: { type: String, default: "Cevaplanmadı" },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export const Ticket = mongoose.model("Ticket", ticketSchema);

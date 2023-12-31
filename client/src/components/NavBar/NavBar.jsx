@@ -1,91 +1,101 @@
-import "tailwindcss/tailwind.css";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 function NavBar() {
   const location = useLocation();
-  const isApplicationPage = location.pathname.startsWith("/basvuru");
-  // const isAdminPage = location.pathname.startsWith("/admin");
+  const isApplicationPage =
+    location.pathname.startsWith("/basvuru") ||
+    location.pathname.endsWith("/admin");
   const accessToken = sessionStorage.getItem("accessToken");
 
+  // State to manage the mobile menu visibility
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
-    <nav className="bg-blue-950 ... px-4 py-2 mb-4 ">
-      <div className="flex justify-between items-center">
-        <div className="mb-4 flex items-center">
-          <img
-            src="../../public/apply.png" // Replace with the actual path to your image
-            alt="Logo"
-            className="w-8 h-8 mr-2 align-middle" // Adjust the size and margin as needed
-            color="white"
-          />
-          <Link to="/basvuru-olustur">
-            <h1 className="mb-4 text-xl sm:text-xl md:text-2xl lg:text-3xl tracking-tight text-white dark:text-white baseline">
-              <span className="underline underline-offset-4 decoration-7 decoration-blue-500 dark:decoration-blue-600">
-                Başvuru Yönetim Sistemi
-              </span>
-            </h1>
-          </Link>
-        </div>
-        <div className="flex space-x-4">
-          {accessToken && (
-            <div className="flex items-center">
-              <Link to="/admin/basvuru-listesi">
-                <button
-                  type="button"
-                  className="bg-blue-500 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded"
+    <nav className="bg-blue-950 border-gray-200 dark:bg-gray-900">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
+        <img src={logo} className="w-32 md:w-40 lg:w-56 h-auto" alt="Logo" />
+
+        <button
+          type="button"
+          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          onClick={handleMobileMenuToggle}
+        >
+          <span className="sr-only">Open main menu</span>
+          <i className="material-icons">menu</i>
+        </button>
+
+        <div
+          className={`${
+            isMobileMenuOpen ? "block" : "hidden"
+          } w-full md:flex md:w-auto`}
+          id="navbar-default"
+        >
+          <ul className="font-medium flex flex-col p-4 md:p-0 mt-3  rounded-lg md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 ">
+            {accessToken && (
+              <li>
+                <Link
+                  to="/admin/basvuru-listesi"
+                  className="text-white font-normal block py-2 px-3 rounded  hover:bg-gray-400 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-2 "
                 >
                   Admin Paneli
-                </button>
-              </Link>
-            </div>
-          )}
-          {isApplicationPage && (
-            <div className="flex items-center">
-              <Link to="/basvuru-sorgula">
-                <button
-                  type="button"
-                  className="bg-blue-500 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded"
+                </Link>
+              </li>
+            )}
+
+            {isApplicationPage && (
+              <li>
+                <Link
+                  to="/basvuru-sorgula"
+                  className="text-white font-normal block py-2 px-3  rounded hover:bg-gray-400 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-2 "
                 >
                   Başvuru Sorgula
-                </button>
-              </Link>
-            </div>
-          )}
-          {isApplicationPage && (
-            <div className="flex items-center">
-              <Link to="/basvuru-olustur">
-                <button
-                  type="button"
-                  className="bg-blue-500 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded"
+                </Link>
+              </li>
+            )}
+
+            {isApplicationPage && (
+              <li>
+                <Link
+                  to="/basvuru-olustur"
+                  className="text-white font-normal block py-2 px-3  rounded hover:bg-gray-400 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-2"
                 >
                   Başvuru Oluştur
-                </button>
-              </Link>
-            </div>
-          )}
-          {!accessToken && (
-            <div className="flex items-center">
-              <Link to="/admin">
-                <button className="bg-blue-800 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded">
+                </Link>
+              </li>
+            )}
+
+            {!accessToken && (
+              <li>
+                <Link
+                  to="/admin"
+                  className="text-white block font-normal py-2 px-3 rounded hover:bg-gray-400 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-2"
+                >
                   Admin Giriş
-                </button>
-              </Link>
-            </div>
-          )}
-          {accessToken && (
-            <div className="flex items-center">
-              <Link
-                to="/"
-                onClick={() => (
-                  sessionStorage.removeItem("accessToken"),
-                  sessionStorage.removeItem("refreshToken")
-                )}
-              >
-                <button className="bg-blue-800 hover:border-blue-300 border-transparent border-2 text-white px-4 py-2 rounded">
+                </Link>
+              </li>
+            )}
+
+            {accessToken && (
+              <li>
+                <Link
+                  to="/"
+                  onClick={() => (
+                    sessionStorage.removeItem("accessToken"),
+                    sessionStorage.removeItem("refreshToken")
+                  )}
+                  className="text-white block font-normal py-2 px-3 rounded hover:bg-gray-400 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-2"
+                >
                   Çıkış
-                </button>
-              </Link>
-            </div>
-          )}
+                </Link>
+              </li>
+            )}
+          </ul>
         </div>
       </div>
     </nav>

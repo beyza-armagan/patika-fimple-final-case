@@ -15,7 +15,6 @@ const ApplicationSuccessful = () => {
 
   const location = useLocation();
 
-  // Memoize the formData object to prevent unnecessary recreation
   const formData = useMemo(
     () =>
       location.state?.formData || {
@@ -34,12 +33,10 @@ const ApplicationSuccessful = () => {
     const fetchData = async () => {
       try {
         const file = location.state?.file;
-        console.log(">> file", file);
         // generate a random code
         const generatedCode = Math.floor(1000 + Math.random() * 9000);
 
         setCode(generatedCode);
-        console.log(generatedCode);
 
         const dataWithCode = {
           ...formData,

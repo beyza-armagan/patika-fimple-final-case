@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import CreateApplication from "./pages/CreateApplication";
 import NavBar from "./components/NavBar/NavBar";
-// import ProtectedRoute from "./pages/ProtectedRoute";
 import AdminLogin from "./components/Admin/AdminLogin";
 import ApplicationList from "./components/Admin/ApplicationList";
 import UpdateApplicationPage from "./components/Admin/UpdateApplicationPage";
