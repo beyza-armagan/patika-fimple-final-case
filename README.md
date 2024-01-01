@@ -19,7 +19,7 @@ password: bootcamp109
 
 The web app is deployed and accessible [here](https://coruscating-alfajores-652f87.netlify.app/basvuru-olustur).
 
-# How to run on Local
+# How to run on local
 
 ## Clone
 ```terminal
@@ -42,7 +42,7 @@ $ cd src             // go to the src folder
 $ node server        // run it locally
 ```
 
-### Prepare your secret
+### Prepare .env file
 
 You need to add a MONGODB_URI, JWT_SECRET and JWT_REFRESH_SECRET in .env file
 
