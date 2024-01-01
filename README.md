@@ -46,9 +46,9 @@ $ echo "JWT_REFRESH_SECRET=YOUR_JWT_REFRESH_SECRET" >> src/.env
 ![Create Application Page](./client/public/looks/createApp.PNG)
 ![Applications List Page](./client/public/looks/applicaitonListAllTypes.PNG)
 <p float="left">
-  <img src="./client/public/looks/mobileApplicationUpdate.PNG" alt="Mobile Search Page" width="220"/>
-  <img src="./client/public/looks/mobileSearchApplicationWithResponse.PNG" alt="Mobile Update Page" width="220"/>
-  <img src="./client/public/looks/mobileApplicationDetailsModal.PNG" alt="Mobile Details Modal Page" width="220"/>
+  <img src="./client/public/looks/mobileApplicationUpdate.PNG" alt="Mobile Search Page" width="240"/>
+  <img src="./client/public/looks/mobileSearchApplicationWithResponse.PNG" alt="Mobile Update Page" width="240"/>
+  <img src="./client/public/looks/mobileApplicationDetailsModal.PNG" alt="Mobile Details Modal Page" width="240"/>
 </p>
 
 
