@@ -2,6 +2,8 @@
 Application Management System
 </h1>
 
+![Applications List Page](./client/public/looks/applicaitonListAllTypes.PNG)
+![Success Page](./client/public/looks/applicationSuccessful.PNG)
 
 # How to run on Local
 ## Clone
