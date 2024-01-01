@@ -2,6 +2,19 @@
 Application Management System
 </h1>
 
+This project involves a public application form that users can fill out to initiate a submission.
+Upon completion, users receive a unique code to track the status of their application. 
+The system allows users to check the response on a dedicated page using the assigned code.
+
+Admins, logging in with a username and password, can view incoming applications. 
+They have the ability to review and respond to unanswered applications, updating their status to resolved, canceled, pending etc.
+
+### To login as an admin:
+
+username: kodluyoruz
+
+password: bootcamp109
+
 # Deployment
 
 The web app is deployed and accessible [here](https://coruscating-alfajores-652f87.netlify.app/basvuru-olustur).
@@ -51,8 +64,26 @@ $ echo "JWT_REFRESH_SECRET=YOUR_JWT_REFRESH_SECRET" >> src/.env
   <img src="./client/public/looks/mobileApplicationDetailsModal.PNG" alt="Mobile Details Modal Page" width="240"/>
 </p>
 
+# Technologies Used
 
-## File Structure
+- **Backend:**
+  - Node.js
+  - Express
+  - MongoDB
+
+- **Frontend:**
+  - React
+  - Tailwind CSS
+
+- **Deployment:**
+  - Netlify
+  - Render
+ 
+- **Validation Library:**
+  - yup
+
+
+# File Structure
 - backend/
   - src/
     - controllers/
