@@ -32,10 +32,11 @@ const ApplicationDetailsModal = ({ application, closeModal }) => {
           <label className="font-bold">Adres:</label>
           <span className="ml-2">{application.address}</span>
         </div>
-        <div className="mb-2">
-          <label className="font-bold">Fotoğraflar/ Ekler:</label>
-          <img src={application.image} />
+        <div className="mb-2 text-center">
+          <label className="font-bold">Fotoğraflar:</label>
+          <img src={application.image} className="mx-auto" />
         </div>
+
         <div className="mb-2">
           <label className="font-bold">Başvuru Durumu:</label>
           <span className="ml-2">{application.status}</span>

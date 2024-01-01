@@ -1,15 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AdminLogin() {
-  const [username, setUsername] = useState("kodluyoruz");
-  const [password, setPassword] = useState("bootcamp109");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
+      if (!username || !password) {
+        setErrorMessage("Kullanıcı adı ve parola boş bırakılamaz.");
+        return;
+      }
+
       const response = await axios.post(
         "https://ticketsystem-ts7l.onrender.com/admin-login",
         {
@@ -17,6 +22,7 @@ function AdminLogin() {
           password,
         }
       );
+
       console.log(response);
       console.log("Login successful");
       sessionStorage.setItem("accessToken", response.data.accessToken);
@@ -24,12 +30,8 @@ function AdminLogin() {
       navigate("/admin/basvuru-listesi");
     } catch (error) {
       console.error("Error:", error);
-      setErrorMessage("Invalid username or password");
+      setErrorMessage("Yanlış parola veya kullanıcı adı");
     }
-  };
-
-  const handleGoBack = () => {
-    navigate(-1); // Go back to the previous page
   };
 
   return (
@@ -47,6 +49,7 @@ function AdminLogin() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded"
+            required
           />
         </div>
         <div className="mb-4">
@@ -59,6 +62,7 @@ function AdminLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded"
+            required
           />
         </div>
         <button
@@ -71,13 +75,6 @@ function AdminLogin() {
           <p style={{ color: "red", textAlign: "center" }}>{errorMessage}</p>
         )}
       </div>
-      <Link
-        to="#"
-        onClick={handleGoBack}
-        className="text-blue-500 hover:underline font"
-      >
-        Geri Dön
-      </Link>
     </div>
   );
 }

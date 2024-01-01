@@ -13,9 +13,5 @@ ticketRoutes.get(
   "/basvuru-sorgula/basvuru/:basvuruNo",
   ticketController.getTicket
 );
-ticketRoutes.post(
-  "http://localhost:3000/basvuru-basarili",
-  ticketController.createTicket
-);
 
 export default ticketRoutes;

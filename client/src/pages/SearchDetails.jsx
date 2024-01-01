@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function SearchDetails() {
@@ -7,12 +7,11 @@ function SearchDetails() {
   const [applicationDetails, setApplicationDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const getStatusColor = (status) => {
     switch (status) {
       case "Cevaplanmadı":
-        return "text-gray font-medium";
+        return "text-blue-500 font-medium";
       case "Bekliyor":
         return "text-yellow-500 font-medium";
       case "Çözüldü":
@@ -23,9 +22,7 @@ function SearchDetails() {
         return "";
     }
   };
-  const handleGoBack = () => {
-    navigate(-1); // go back to the previous page
-  };
+
   useEffect(() => {
     const fetchApplicationDetails = async () => {
       try {
@@ -56,13 +53,6 @@ function SearchDetails() {
       <>
         <p className="text-xl font-bold mb-4">404</p>
         <p className="text-l font-bold mb-4">{error}</p>
-        <Link
-          to="#"
-          onClick={handleGoBack}
-          className="text-blue-500 hover:underline font"
-        >
-          Geri Dön
-        </Link>
       </>
     );
   }
@@ -95,12 +85,13 @@ function SearchDetails() {
           <label className="font-bold">Adres:</label>
           <span className="ml-2">{applicationDetails.address}</span>
         </div>
-        <div className="mb-2">
-          <label className="font-bold">Fotoğraflar/Ekler:</label>
+        <div className="mb-2 text-center">
+          <label className="font-bold">Fotoğraflar:</label>
           <span className="ml-2">
-            <img src={applicationDetails.image} />
+            <img src={applicationDetails.image} className="mx-auto" />
           </span>
         </div>
+
         <div className="mb-2">
           <label className="font-bold">Başvuru Cevabı:</label>
           <span className="ml-2">{applicationDetails.adminResponse}</span>
@@ -117,13 +108,6 @@ function SearchDetails() {
           </span>
         </div>
       </div>
-      <Link
-        to="#"
-        onClick={handleGoBack}
-        className="text-blue-500 hover:underline font"
-      >
-        Geri Dön
-      </Link>
     </>
   );
 }

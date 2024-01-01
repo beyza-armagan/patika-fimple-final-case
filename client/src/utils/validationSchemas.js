@@ -19,15 +19,3 @@ export const applicationForm = yup.object().shape({
   file: yup.string(),
   date: yup.string(),
 });
-
-export const adminLoginForm = yup.object().shape({
-  username: yup.string().required("Bu alan zorunludur"),
-  password: yup
-    .string()
-    .required("Bu alan zorunludur")
-    .min(8, "Parola en az 8 karakter olmalıdır")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-      "Parola en az bir küçük harf, bir büyük harf, bir rakam ve bir özel karakter içermelidir"
-    ),
-});

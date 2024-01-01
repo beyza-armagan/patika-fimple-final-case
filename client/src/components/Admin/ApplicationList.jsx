@@ -1,8 +1,9 @@
 //import { useData } from "../context/DataContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ApplicationDetailsModal from "./ApplicationDetailsModal";
+import { formatDate } from "../../utils/formatDate";
 
 function ApplicationList() {
   const navigate = useNavigate();
@@ -15,9 +16,6 @@ function ApplicationList() {
 
   const closeModal = () => {
     setSelectedApplication(null);
-  };
-  const handleGoBack = () => {
-    navigate(-1); // go back to the previous page
   };
 
   useEffect(() => {
@@ -74,10 +72,13 @@ function ApplicationList() {
 
   return (
     <>
-      <div className="relative overflow-x-auto mt-8 mb-4">
+      <div className="relative overflow-x-auto mt-8 mb-4 px-8 sm:px-10 lg:px-12">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-900 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
+              <th scope="col" className="px-6 py-3">
+                Başvuru Tarihi
+              </th>
               <th scope="col" className="px-6 py-3">
                 Başvuru Durumu
               </th>
@@ -91,21 +92,6 @@ function ApplicationList() {
                 Soyad
               </th>
               <th scope="col" className="px-6 py-3">
-                Yaş
-              </th>
-              <th scope="col" className="px-6 py-3">
-                TC
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Başvuru Nedeni
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Adres
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Fotoğraflar/ Ekler
-              </th>
-              <th scope="col" className="px-6 py-3">
                 Başvuruyu Görüntüle
               </th>
               <th scope="col" className="px-6 py-3">
@@ -117,8 +103,11 @@ function ApplicationList() {
             {sortedApplications.map((application) => (
               <tr
                 key={application.applicationCode}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50"
+                className="bg-white border-b hover:bg-gray-50"
               >
+                <td className="px-6 py-4">
+                  {formatDate(new Date(application.date))}
+                </td>
                 <td className="px-6 py-4">
                   <span
                     className={`inline-block px-2 py-1 rounded-full ${getStatusColor(
@@ -128,17 +117,10 @@ function ApplicationList() {
                     {application.status}
                   </span>
                 </td>
-
                 <td className="px-6 py-4">{application.applicationCode}</td>
                 <td className="px-6 py-4">{application.name}</td>
                 <td className="px-6 py-4">{application.surname}</td>
-                <td className="px-6 py-4">{application.age}</td>
-                <td className="px-6 py-4">{application.tc}</td>
-                <td className="px-6 py-4">{application.applicationReason}</td>
-                <td className="px-6 py-4">{application.address}</td>
-                <td className="px-6 py-4">
-                  <img src={application.image} />
-                </td>
+
                 <td className="px-6 py-4">
                   <button
                     onClick={() => handleViewDetails(application)}
@@ -147,7 +129,7 @@ function ApplicationList() {
                     Görüntüle
                   </button>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 ">
                   <button
                     onClick={() => handleUpdate(application.applicationCode)}
                     className="bg-blue-800 text-white px-4 py-2 rounded hover:bg-blue-950"
@@ -166,14 +148,6 @@ function ApplicationList() {
           )}
         </table>
       </div>
-
-      <Link
-        to="#"
-        onClick={handleGoBack}
-        className="text-blue-500 hover:underline font"
-      >
-        Geri Dön
-      </Link>
     </>
   );
 }

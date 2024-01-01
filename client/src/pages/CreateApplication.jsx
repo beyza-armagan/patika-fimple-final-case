@@ -209,14 +209,14 @@ export default function CreateApplication() {
             <label htmlFor="file" className="block font-bold mb-2">
               Fotoğraflar:
             </label>
-            <div className="mx-auto max-w-[400px]">
+            <div className="mx-auto max-w-[400px] ">
               <input
                 {...register("file")}
                 className="block w-full text-sm text-slate-500
-                           file:mr-4 file:py-2 file:px-4 file:rounded-md
-                           file:border-0 file:text-sm file:font-semibold
-                           file:bg-[#dbeafe] file:text-blue-700
-                           hover:file:bg-blue-400 "
+                 file:mr-4 file:py-2 file:px-4 file:rounded-md
+                 file:border-0 file:text-sm file:font-semibold
+                 file:bg-[#dbeafe] file:text-blue-700
+                 hover:file:bg-blue-400"
                 type="file"
                 name="file"
                 id="file"
@@ -229,7 +229,7 @@ export default function CreateApplication() {
               className="mt-4 mb-1 text-sm text-gray-500 dark:text-gray-300"
               id="file_input_help"
             >
-              SVG, PNG or JPG (MAX. 800x400px, 10MB).
+              Bir SVG, PNG ya da JPG dosyası (MAX. 800x400px, 10MB).
             </p>
           </div>
         </div>

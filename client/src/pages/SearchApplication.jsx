@@ -1,16 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function SearchApplication() {
   const [applicationCode, setApplicationCode] = useState("");
-  const navigate = useNavigate();
 
   const handleSearch = () => {
     return <Link to={`/basvuru-sorgula?code=${applicationCode}`} />;
-  };
-
-  const handleGoBack = () => {
-    navigate(-1); // Go back to the previous page
   };
 
   return (
@@ -46,13 +41,6 @@ function SearchApplication() {
           </div>
         </div>
       </div>
-      <Link
-        to="#"
-        onClick={handleGoBack}
-        className="text-blue-500 hover:underline font"
-      >
-        Geri Dön
-      </Link>{" "}
     </>
   );
 }

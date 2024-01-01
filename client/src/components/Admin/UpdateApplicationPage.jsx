@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function UpdateApplicationPage() {
@@ -10,10 +10,6 @@ function UpdateApplicationPage() {
   const { basvuruNo } = useParams();
 
   console.log(basvuruNo);
-
-  const handleGoBack = () => {
-    navigate(-1);
-  };
 
   useEffect(() => {
     const accessToken = sessionStorage.getItem("accessToken");
@@ -87,7 +83,7 @@ function UpdateApplicationPage() {
           <span className="ml-2">{ticketInfo.address}</span>
         </div>
         <div className="mb-2">
-          <label className="font-bold">Fotoğraflar/ Ekler:</label>
+          <label className="font-bold">Fotoğraflar:</label>
           <span className="ml-2">{ticketInfo.additionalInfo}</span>
         </div>
         <div className="mb-2">
@@ -118,13 +114,6 @@ function UpdateApplicationPage() {
           Gönder
         </button>
       </div>
-      <Link
-        to="#"
-        onClick={handleGoBack}
-        className="block mt-2 text-blue-500 hover:underline"
-      >
-        Geri Dön
-      </Link>{" "}
     </>
   );
 }
