@@ -1,4 +1,4 @@
-<h1 align="center">
+<h1>
 Application Management System
 </h1>
 
