@@ -2,10 +2,12 @@
 Application Management System
 </h1>
 
-![Applications List Page](./client/public/looks/applicaitonListAllTypes.PNG)
-![Success Page](./client/public/looks/applicationSuccessful.PNG)
+# Deployment
+
+The web app is deployed and accessible [here](https://coruscating-alfajores-652f87.netlify.app/basvuru-olustur).
 
 # How to run on Local
+
 ## Clone
 ```terminal
 $ git clone https://github.com/beyza-armagan/patika-fimple-final-case.git
@@ -38,6 +40,17 @@ $ echo "MONGODB_URI=YOUR_MONGODB_URI" >> src/.env
 $ echo "JWT_SECRET=YOUR_JWT_SECRET" >> src/.env
 $ echo "JWT_REFRESH_SECRET=YOUR_JWT_REFRESH_SECRET" >> src/.env
 ```
+
+# Screenshots
+
+![Create Application Page](./client/public/looks/createApp.PNG)
+![Applications List Page](./client/public/looks/applicaitonListAllTypes.PNG)
+<p float="left">
+  <img src="./client/public/looks/mobileApplicationUpdate.PNG" alt="Mobile Search Page" width="300"/>
+  <img src="./client/public/looks/mobileSearchApplicationWithResponse.PNG" alt="Mobile Update Page" width="300"/>
+  <img src="./client/public/looks/mobileApplicationDetailsModal.PNG" alt="Mobile Details Modal Page" width="300"/>
+</p>
+
 
 ## File Structure
 - backend/
