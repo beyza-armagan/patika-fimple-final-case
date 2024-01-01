@@ -20,7 +20,7 @@ const ticketSchema = new mongoose.Schema({
   adminResponse: { type: String, default: "Cevaplanmadı" },
   date: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
 });
 

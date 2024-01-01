@@ -33,14 +33,16 @@ const ApplicationSuccessful = () => {
     const fetchData = async () => {
       try {
         const file = location.state?.file;
+        const date = location.state?.date;
         // generate a random code
         const generatedCode = Math.floor(1000 + Math.random() * 9000);
-
+        console.log("inhere");
         setCode(generatedCode);
 
         const dataWithCode = {
           ...formData,
           file,
+          date,
           applicationCode: generatedCode,
         };
 
