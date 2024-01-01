@@ -17,7 +17,7 @@ export const applicationForm = yup.object().shape({
   applicationReason: yup.string().required("Bu alan zorunludur"),
   address: yup.string().required("Bu alan zorunludur"),
   file: yup.string(),
-  date: yup.date(),
+  date: yup.string(),
 });
 
 export const adminLoginForm = yup.object().shape({

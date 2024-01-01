@@ -12,7 +12,6 @@ export default function CreateApplication() {
 
   const { setData } = useData();
   const [file, setFile] = useState("");
-  const [date, setDate] = useState();
   const defaultValues = {
     //default values for ticket creation
     name: "",
@@ -22,7 +21,6 @@ export default function CreateApplication() {
     applicationReason: "",
     address: "",
     file: "",
-    date: "",
   };
 
   const {
@@ -33,14 +31,8 @@ export default function CreateApplication() {
   } = useForm({ resolver, defaultValues });
 
   const handleFormSubmit = async (formData) => {
-    const currentDate = new Date();
-
-    const formattedDate = currentDate.toISOString();
-    setDate(formattedDate);
-    formData.date = date;
-
     setData({ ...formData });
-    navigate("/basvuru-basarili", { state: { formData, file, date } });
+    navigate("/basvuru-basarili", { state: { formData, file } });
   };
 
   const getBase64 = (file) => {

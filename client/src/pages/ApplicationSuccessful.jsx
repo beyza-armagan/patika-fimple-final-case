@@ -33,7 +33,6 @@ const ApplicationSuccessful = () => {
     const fetchData = async () => {
       try {
         const file = location.state?.file;
-        const date = location.state?.date;
         // generate a random code
         const generatedCode = Math.floor(1000 + Math.random() * 9000);
         console.log("inhere");
@@ -42,7 +41,7 @@ const ApplicationSuccessful = () => {
         const dataWithCode = {
           ...formData,
           file,
-          date,
+          date: Date.now(),
           applicationCode: generatedCode,
         };
 
@@ -51,6 +50,8 @@ const ApplicationSuccessful = () => {
           "https://ticketsystem-ts7l.onrender.com/basvuru-olustur",
           dataWithCode
         );
+
+        console.log(dataWithCode);
 
         setData(dataWithCode);
       } catch (error) {
