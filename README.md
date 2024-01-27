@@ -1,11 +1,26 @@
-<h1 align="center">
+<h1>
 Application Management System
 </h1>
 
-![Applications List Page](./client/public/looks/applicaitonListAllTypes.PNG)
-![Success Page](./client/public/looks/applicationSuccessful.PNG)
+This project involves a public application form that users can fill out to initiate a submission.
+Upon completion, users receive a unique code to track the status of their application. 
+The system allows users to check the response on a dedicated page using the assigned code.
 
-# How to run on Local
+Admins, logging in with a username and password, can view incoming applications. 
+They have the ability to review and respond to unanswered applications, updating their status to resolved, canceled, pending etc.
+
+### To login as an admin:
+
+username: kodluyoruz
+
+password: bootcamp109
+
+# Deployment
+
+The web app is deployed and accessible [here](https://coruscating-alfajores-652f87.netlify.app/basvuru-olustur).
+
+# How to run on local
+
 ## Clone
 ```terminal
 $ git clone https://github.com/beyza-armagan/patika-fimple-final-case.git
@@ -27,7 +42,7 @@ $ cd src             // go to the src folder
 $ node server        // run it locally
 ```
 
-### Prepare your secret
+### Prepare .env file
 
 You need to add a MONGODB_URI, JWT_SECRET and JWT_REFRESH_SECRET in .env file
 
@@ -39,7 +54,36 @@ $ echo "JWT_SECRET=YOUR_JWT_SECRET" >> src/.env
 $ echo "JWT_REFRESH_SECRET=YOUR_JWT_REFRESH_SECRET" >> src/.env
 ```
 
-## File Structure
+# Screenshots
+
+![Create Application Page](./client/public/looks/createApp.PNG)
+![Applications List Page](./client/public/looks/applicaitonListAllTypes.PNG)
+<p float="left">
+  <img src="./client/public/looks/mobileApplicationUpdate.PNG" alt="Mobile Search Page" width="240"/>
+  <img src="./client/public/looks/mobileSearchApplicationWithResponse.PNG" alt="Mobile Update Page" width="240"/>
+  <img src="./client/public/looks/mobileApplicationDetailsModal.PNG" alt="Mobile Details Modal Page" width="240"/>
+</p>
+
+# Technologies Used
+
+- **Backend:**
+  - Node.js
+  - Express
+  - MongoDB
+
+- **Frontend:**
+  - React
+  - Tailwind CSS
+
+- **Deployment:**
+  - Netlify
+  - Render
+ 
+- **Validation Library:**
+  - yup
+
+
+# File Structure
 - backend/
   - src/
     - controllers/
