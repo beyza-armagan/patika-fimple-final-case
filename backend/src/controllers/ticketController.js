@@ -101,4 +101,27 @@ export const ticketController = {
       res.status(500).send({ error: "Internal Server Error" });
     }
   },
+
+  deleteTicket: async (req, res) => {
+    try {
+      const { basvuruNo } = req.params;
+
+      // find ticket by applicationCode and delete it
+      const deletedTicket = await Ticket.findOneAndDelete({
+        applicationCode: basvuruNo,
+      });
+
+      if (!deletedTicket) {
+        return res.status(404).send({ error: "Böyle bir başvuru bulunamadı." });
+      }
+
+      res.status(200).json({
+        message: "Application deleted successfully",
+        ticket: deletedTicket,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };
